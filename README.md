@@ -44,6 +44,29 @@ pytest tests/ -v --headed           # watch the browser run
 pytest tests/ -v --headed --slowmo 1000   # watch it run slowly, step by step
 ```
 
+## AI Agent Integration
+
+This framework is wired to an AI QA agent (`agent/`) that reads a user story and generates structured test cases end-to-end: requirement analysis -> scenario design -> test case generation, using Google Gemini with schema-validated structured output.
+
+The key integration point is an honest one: the agent's generated test cases are natural language (`test_steps` as a string), not executable code. Rather than unreliably asking an LLM to generate Playwright code at runtime, each test case is explicitly mapped (`automation_map.py`) to a real, hand-implemented Playwright test that fulfills it.
+
+**This produces a genuine, measurable "automation coverage" metric** - not just "we wrote some tests," but "of the N test cases our AI agent actually designed, here's exactly how many have real automation behind them, and which ones don't yet":
+
+```bash
+python generate_test_cases.py   # agent designs test cases from agent/user_story.txt
+python coverage_report.py       # cross-references against automation_map.py
+```
+
+## AI-Assisted Failure Triage
+
+When a mapped Playwright test fails, `triage_failure.py` captures the real pytest failure output, pulls in the original agent-designed `expected_result` for context, and asks an LLM to produce a root-cause hypothesis - distinguishing a real application bug from a bug in the test itself (wrong locator, wrong expected value, timing issue):
+
+```bash
+python triage_failure.py
+```
+
+This was verified against a real seeded failure (an intentionally wrong expected error-message assertion) - the AI correctly identified it as a test-authoring bug, not an application defect, citing the specific evidence from the failure output that supported that conclusion.
+
 ## Tech stack
 
-Python, Playwright, pytest, Page Object Model, GitHub Actions.
+Python, Playwright, pytest, Page Object Model, Google Gemini API, Pydantic, GitHub Actions.

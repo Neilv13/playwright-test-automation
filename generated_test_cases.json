@@ -1,0 +1,58 @@
+{
+  "test_cases": [
+    {
+      "tc_id": "TC_LOG_001",
+      "scenario": "Successful Login with Valid Credentials",
+      "type": "Positive",
+      "preconditions": "User is on the SauceDemo login page and has a valid account.",
+      "test_steps": "1. Enter valid username in the username field. 2. Enter matching password in the password field. 3. Click the Login button.",
+      "expected_result": "User is successfully logged in and redirected to the inventory page.",
+      "priority": "High"
+    },
+    {
+      "tc_id": "TC_LOG_002",
+      "scenario": "Unsuccessful Login with Invalid Credentials",
+      "type": "Negative",
+      "preconditions": "User is on the SauceDemo login page.",
+      "test_steps": "1. Enter an invalid username or password. 2. Click the Login button.",
+      "expected_result": "An error message indicating invalid credentials is displayed.",
+      "priority": "High"
+    },
+    {
+      "tc_id": "TC_LOG_003",
+      "scenario": "Login with Empty Username and Password Fields",
+      "type": "Boundary",
+      "preconditions": "User is on the SauceDemo login page.",
+      "test_steps": "1. Leave username and password fields blank. 2. Click the Login button.",
+      "expected_result": "An error message indicating that fields are required is displayed.",
+      "priority": "Medium"
+    },
+    {
+      "tc_id": "TC_CART_001",
+      "scenario": "Add Single Product to Shopping Cart",
+      "type": "Positive",
+      "preconditions": "User is logged in and on the product listing page.",
+      "test_steps": "1. Locate a product. 2. Click the 'Add to cart' button for that product.",
+      "expected_result": "The product is added to the cart, and the cart icon count updates to '1'.",
+      "priority": "High"
+    },
+    {
+      "tc_id": "TC_CART_002",
+      "scenario": "Add Multiple Products to Shopping Cart",
+      "type": "Positive",
+      "preconditions": "User is logged in and on the product listing page with an empty cart.",
+      "test_steps": "1. Click 'Add to cart' for the first product. 2. Click 'Add to cart' for a second product.",
+      "expected_result": "Both products are added to the cart, and the cart icon count updates to reflect the total number of items (e.g., '2').",
+      "priority": "High"
+    },
+    {
+      "tc_id": "TC_CART_003",
+      "scenario": "Cart Icon Count Validation for Maximum Items",
+      "type": "Boundary",
+      "preconditions": "User is logged in and on the product listing page.",
+      "test_steps": "1. Add all available products on the listing page to the shopping cart one by one.",
+      "expected_result": "The cart icon accurately updates its count to match the total number of all added items without UI degradation.",
+      "priority": "Medium"
+    }
+  ]
+}

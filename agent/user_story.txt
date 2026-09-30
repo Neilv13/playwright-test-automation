@@ -1,0 +1,12 @@
+User Story: As a registered user of the SauceDemo e-commerce site, I want to log in with my
+credentials and add products to my shopping cart, so that I can proceed toward purchasing items.
+
+Acceptance Criteria:
+- User can log in with a valid username and password.
+- User sees an error message when logging in with invalid credentials.
+- After logging in, user can add a product to the cart from the product listing page.
+- The cart icon updates to show the correct count of items added.
+
+Business Rules:
+- Only a registered username and matching password combination allows login.
+- The cart count must accurately reflect the number of items currently added.

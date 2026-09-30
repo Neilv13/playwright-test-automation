@@ -1,2 +1,5 @@
 pytest
 pytest-playwright
+google-genai
+python-dotenv
+pydantic
